@@ -15,7 +15,7 @@ public class DriveWithJoystick extends CommandBase {
     /**
      * Construct this command.
      */
-    public DriveWithJoystick(Chassis chassis) {
+    public DriveWithJoystick() {
         // We need the chassis to drive with the joystick.
         requires(chassis);
     }

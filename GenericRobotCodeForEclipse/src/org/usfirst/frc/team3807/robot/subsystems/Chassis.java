@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3807.robot.subsystems;
 
+import org.usfirst.frc.team3807.robot.commands.CommandBase;
 import org.usfirst.frc.team3807.robot.commands.DriveWithJoystick;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -16,6 +17,7 @@ public class Chassis extends Subsystem {
     //Our drive code
     public static RobotDrive drive;
     public boolean followingFrisbee;
+    private double lastAngle;
 
     /**
      * Create an instance of the chassis class with the appropriate motors.
@@ -46,6 +48,7 @@ public class Chassis extends Subsystem {
      * @param rearLeftMotor
      */
     public Chassis(int leftMotor, int rightMotor) {
+    	//System.out.println("Construct Chassis");
         //Create new robot drive class with pin values for the two motors
         if (leftMotor != -1 && rightMotor != -1) {
             drive = new RobotDrive(leftMotor, rightMotor);
@@ -55,6 +58,7 @@ public class Chassis extends Subsystem {
             //System.out.println("FAILURE: Chassis not created due to port value as -1.");
         }
         this.followingFrisbee = false;
+        lastAngle = CommandBase.sensorBase.getAngle();
     }
 
     /**
@@ -62,7 +66,8 @@ public class Chassis extends Subsystem {
      */
     protected void initDefaultCommand() {
         //Starts driving the robot with this non terminating command
-        setDefaultCommand(new DriveWithJoystick(this));
+    	//System.out.println("iDC");
+        setDefaultCommand(new DriveWithJoystick());
     }
 
     /**
@@ -71,20 +76,18 @@ public class Chassis extends Subsystem {
      * @param joystick
      */
     public void driveWithJoyStick(Joystick joystick) {
-        if(!this.isFollowingFrisbee()){
-        //Turn is the reverse of x
-        double turn = joystick.getX();
+        
+        double turn = joystick.getZ();
         //Drive is the y
         double move = joystick.getY();
-        if (drive != null && !this.followingFrisbee) {
-            drive(move, turn);
-        }}
+        if (drive != null) {
+            drive(-move, -turn);
+        }
     }
 
     public void drive(double move, double turn) {
-        if (drive != null) {
-            drive.arcadeDrive(move, turn);
-        }
+    	//System.out.println(move + " : " + turn);
+        drive.arcadeDrive(move * .5, turn * .5);
     }
 
     public boolean isFollowingFrisbee() {

@@ -4,7 +4,10 @@ import org.usfirst.frc.team3807.robot.OI;
 import org.usfirst.frc.team3807.robot.RobotMap;
 import org.usfirst.frc.team3807.robot.subsystems.Camera;
 import org.usfirst.frc.team3807.robot.subsystems.Chassis;
+import org.usfirst.frc.team3807.robot.subsystems.Elevator;
+import org.usfirst.frc.team3807.robot.subsystems.IntakeMechanism;
 import org.usfirst.frc.team3807.robot.subsystems.Network;
+import org.usfirst.frc.team3807.robot.subsystems.SensorBase;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,11 +23,12 @@ public abstract class CommandBase extends Command {
 
     public static OI oi;
     // Create a single static instance of all of your subsystems
-    public static Chassis chassis = new Chassis(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR);
-    public static Network network = new Network();
-    //public static Picker picker = new Picker(RobotMap.PICKER_SPIKE, RobotMap.SOLENOID_FORWARD, RobotMap.SOLENOID_BACK, RobotMap.SOLENOID2_FORWARD, RobotMap.SOLENOID2_BACK, RobotMap.COMPRESSOR_SENSOR, RobotMap.COMPRESSOR);
-    //public static Shooter shooter = new Shooter(RobotMap.SHOOTER_SPIKE, RobotMap.SERVO_PORT);
-    public static Camera camera = new Camera(RobotMap.CAM_PAN, RobotMap.CAM_TILT);
+    public static Chassis chassis = new Chassis(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.REAR_LEFT_MOTOR, RobotMap.REAR_RIGHT_MOTOR);
+    //public static Network network = new Network();
+    public static Camera camera = new Camera(RobotMap.CAM_PAN, RobotMap.CAM_TILT, 6, 0);
+    public static SensorBase sensorBase = new SensorBase(RobotMap.TOP_HALL_PORT,RobotMap.BOTTOM_HALL_PORT,RobotMap.REED1_PORT,RobotMap.REED2_PORT,6, 7, RobotMap.TOTE_LIMIT_SWITCH,0);
+    public static Elevator elevator = new Elevator(RobotMap.ELEVATOR1, RobotMap.ELEVATOR2);
+    //public static IntakeMechanism intake = new IntakeMechanism(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

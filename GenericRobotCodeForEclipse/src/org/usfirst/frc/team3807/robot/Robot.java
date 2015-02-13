@@ -9,6 +9,7 @@ package org.usfirst.frc.team3807.robot;
 import org.usfirst.frc.team3807.robot.commands.Autonomous;
 import org.usfirst.frc.team3807.robot.commands.CommandBase;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -21,7 +22,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class RobotTemplate extends IterativeRobot {
+public class Robot extends IterativeRobot {
 
     Autonomous autoCommand; //The command for autonomous
 
@@ -31,9 +32,14 @@ public class RobotTemplate extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+    	CommandBase.init();
+    	autoCommand = new Autonomous();
+    	//CameraServer server = CameraServer.getInstance();
+    	//server.startAutomaticCapture("cam1");
     }
 
     public void autonomousInit() {
+    	Scheduler.getInstance().add(autoCommand);
     }
 
     /**

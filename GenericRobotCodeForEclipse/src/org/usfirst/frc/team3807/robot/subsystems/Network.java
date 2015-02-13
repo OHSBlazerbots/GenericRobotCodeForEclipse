@@ -6,6 +6,7 @@ package org.usfirst.frc.team3807.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 
 /**
@@ -22,7 +23,7 @@ public class Network extends Subsystem{
      * Initializes private reference to SmartDashboard
      */
     public Network() {
-        server = NetworkTable.getTable("SmartDashboard");
+        server = NetworkTable.getTable("RoboRealm");
     }
     
     /**
@@ -47,6 +48,7 @@ public class Network extends Subsystem{
             
         }
         catch (TableKeyNotDefinedException exp){
+        	server.putNumber(s, -42);
             return 0;
         }
     }
