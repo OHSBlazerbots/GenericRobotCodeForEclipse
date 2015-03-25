@@ -25,10 +25,10 @@ public abstract class CommandBase extends Command {
     // Create a single static instance of all of your subsystems
     public static Chassis chassis = new Chassis(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.REAR_LEFT_MOTOR, RobotMap.REAR_RIGHT_MOTOR);
     //public static Network network = new Network();
-    public static Camera camera = new Camera(RobotMap.CAM_PAN, RobotMap.CAM_TILT, 6, 0);
-    public static SensorBase sensorBase = new SensorBase(RobotMap.TOP_HALL_PORT,RobotMap.BOTTOM_HALL_PORT,RobotMap.REED1_PORT,RobotMap.REED2_PORT,6, 7, RobotMap.TOTE_LIMIT_SWITCH,0);
+    public static Camera camera = new Camera(RobotMap.CAM_PAN1, RobotMap.CAM_TILT1, RobotMap.CAM_PAN2, RobotMap.CAM_TILT2);
+    public static SensorBase sensorBase = new SensorBase(RobotMap.TOP_HALL_PORT,RobotMap.BOTTOM_HALL_PORT,RobotMap.REED1_PORT,RobotMap.REED2_PORT,RobotMap.LINEAR_ENCODER_PORT1, RobotMap.LINEAR_ENCODER_PORT2, RobotMap.TOTE_LIMIT_SWITCH,RobotMap.GYRO_PORT,RobotMap.ULTRA_SONIC_PORT1,RobotMap.ULTRA_SONIC_PORT2);
     public static Elevator elevator = new Elevator(RobotMap.ELEVATOR1, RobotMap.ELEVATOR2);
-    //public static IntakeMechanism intake = new IntakeMechanism(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
+    public static IntakeMechanism intake = new IntakeMechanism(RobotMap.INTAKE_LEFT,RobotMap.INTAKE_RIGHT);
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

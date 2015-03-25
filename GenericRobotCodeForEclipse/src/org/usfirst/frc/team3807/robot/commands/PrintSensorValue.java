@@ -1,23 +1,15 @@
 package org.usfirst.frc.team3807.robot.commands;
 
-import org.usfirst.frc.team3807.robot.OI;
-
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class DriveCamWithJoystick extends CommandBase {
+public class PrintSensorValue extends CommandBase {
 
-	JoystickButton button1, button2;
-	
-    public DriveCamWithJoystick() {
+    public PrintSensorValue() {
         // Use requires() here to declare subsystem dependencies
-        requires(camera);
-        button1 = new JoystickButton(oi.getCoDriverJoystick2(), 1);
-        button2 = new JoystickButton(oi.getCoDriverJoystick(), 1);
+        requires(sensorBase);
     }
 
     // Called just before this Command runs the first time
@@ -26,12 +18,11 @@ public class DriveCamWithJoystick extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(button1.get()){
-    		camera.driveCam1WithJoyStick(oi.getCoDriverJoystick2());
-    	}
-    	if(button2.get()){
-    		camera.driveCam2WithJoystick(oi.getCoDriverJoystick());
-    	}
+    	//System.out.println("R1: " + sensorBase.getReed1());
+    	//System.out.println("R2: " + sensorBase.getReed2());
+    	//System.out.println("R3: " + sensorBase.getReed3());
+    	//System.out.println("R4: " + sensorBase.getReed4());
+    	//System.out.println("HT: " + sensorBase.getTopHall());
     	
     }
 

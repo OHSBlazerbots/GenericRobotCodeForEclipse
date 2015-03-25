@@ -7,6 +7,7 @@ import org.usfirst.frc.team3807.robot.commands.PrintSensorValue;
 import org.usfirst.frc.team3807.robot.commands.ReverseIntake;
 import org.usfirst.frc.team3807.robot.commands.RumbleMaker;
 import org.usfirst.frc.team3807.robot.commands.StartIntake;
+import org.usfirst.frc.team3807.robot.commands.ToggleIntakeForward;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -22,7 +23,7 @@ public class OI {
             joystick2 = new Joystick(RobotMap.JOYSTICK2_PORT),
             joystick3 = new Joystick(RobotMap.JOYSTICK3_PORT); //Co-Driver
 
-    private final JoystickButton setPos0, setPos1, setPos2, setPos4, coDriverOverride, intake, reverseIntake, goToAnalog;
+    private final JoystickButton setPos0, setPos1, setPos2, setPos4, intake, reverseIntake, goToAnalog, intake1;
     /**
      *
      */
@@ -33,23 +34,25 @@ public class OI {
     	//getHall = new JoystickButton(joystick2, 1);
     	//getHall.toggleWhenPressed(new PrintSensorValue());
     	
+    	intake1 = new JoystickButton(joystick3, 3);
     	setPos0 = new JoystickButton(joystick2, 3);
     	setPos1 = new JoystickButton(joystick2, 4);
     	setPos2 = new JoystickButton(joystick2, 5);
     	setPos4 = new JoystickButton(joystick2, 2);
-    	coDriverOverride = new JoystickButton(joystick2, 1);
+    	//coDriverOverride = new JoystickButton(joystick2, 1);
     	intake = new JoystickButton(joystick, 1);
     	reverseIntake = new JoystickButton(joystick, 2);
     	goToAnalog = new JoystickButton(joystick2, 9);
     	
+    	intake1.toggleWhenPressed(new ToggleIntakeForward());
     	setPos0.whenPressed(new GoToPosition(0));
     	setPos1.whenPressed(new GoToPosition(1));
-    	setPos2.whenPressed(new GoToPosition(2));
+    	//setPos2.whenPressed(new GoToPosition(2));
     	setPos4.whenPressed(new GoToPosition(3));
-    	coDriverOverride.whileHeld(new DriveElevatorWithJoystick());
+    	//coDriverOverride.whileHeld(new DriveElevatorWithJoystick());
     	intake.whileHeld(new StartIntake());
     	reverseIntake.whileHeld(new ReverseIntake());
-    	goToAnalog.whileHeld(new GoToAnalogPoint());
+    	//goToAnalog.whileHeld(new GoToAnalogPoint());
     }
 
     //Returns the joystick that controls driving
