@@ -81,13 +81,13 @@ public class Chassis extends Subsystem {
         //Drive is the y
         double move = joystick.getY();
         if (drive != null) {
-            drive(-move, -turn);
+            drive(-move * (((joystick.getThrottle() + 1) * .5) + 1), -turn);
         }
     }
 
     public void drive(double move, double turn) {
     	//System.out.println(move + " : " + turn);
-        drive.arcadeDrive(move * .5, turn * .5);
+        drive.arcadeDrive(move * .5, turn * .35);
     }
 
     public boolean isFollowingFrisbee() {

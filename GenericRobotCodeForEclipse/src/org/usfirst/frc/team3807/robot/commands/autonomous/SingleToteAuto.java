@@ -19,7 +19,7 @@ public class SingleToteAuto extends Autonomous {
 		 
 		 //drive to auto zone
 		 addSequential(new DriveRobot(1, 0));
-		 addSequential(new WaitCommand(1.5));
+		 addSequential(new WaitCommand(2.5));
 		 addSequential(new HaltRobot());
 	}
 }

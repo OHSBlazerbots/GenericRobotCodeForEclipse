@@ -10,6 +10,7 @@ import org.usfirst.frc.team3807.robot.commands.CommandBase;
 import org.usfirst.frc.team3807.robot.commands.autonomous.Autonomous;
 import org.usfirst.frc.team3807.robot.commands.autonomous.DoNothingAuto;
 import org.usfirst.frc.team3807.robot.commands.autonomous.DriveForwardAuto;
+import org.usfirst.frc.team3807.robot.commands.autonomous.LandfillAuto;
 import org.usfirst.frc.team3807.robot.commands.autonomous.SingleToteAuto;
 import org.usfirst.frc.team3807.robot.commands.autonomous.ThreeToteAuto;
 
@@ -34,12 +35,12 @@ public class Robot extends IterativeRobot {
 	boolean cancelAuto;
 	BuiltInAccelerometer bia = new BuiltInAccelerometer();
 	public static Robot robot;
-	
+
 	double velocityX, velocityY, positionX, positionY;
 	long lastTime = -1;
-	
-	public void positionThisThing(){
-		if(lastTime == -1){
+
+	public void positionThisThing() {
+		if (lastTime == -1) {
 			lastTime = System.nanoTime();
 			return;
 		}
@@ -51,26 +52,50 @@ public class Robot extends IterativeRobot {
 		positionX += velocityX * (time - lastTime) * 1000000000;
 		positionY += velocityY * (time - lastTime) * 1000000000;
 	}
-	
 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
-		
+
 		System.out.println("ROBOT!!!!!!!!!!");
 		CommandBase.init();
+		try {
+			SmartDashboard.getBoolean("DoNothingAuto");
+		} catch (Exception e) {
+			SmartDashboard.putBoolean("DoNothingAuto", false);
+		}
 
-		SmartDashboard.putBoolean("DoNothingAuto", false);
-		SmartDashboard.putBoolean("DriveForwardAuto", false);
-		SmartDashboard.putBoolean("SingleToteAuto", false);
-		SmartDashboard.putBoolean("ThreeToteAuto", false);
+		try {
+			SmartDashboard.getBoolean("DriveForwardAuto");
+		} catch (Exception e) {
+			SmartDashboard.putBoolean("DriveForwardAuto", false);
+		}
+
+		try {
+			SmartDashboard.getBoolean("SingleToteAuto");
+		} catch (Exception e) {
+			SmartDashboard.putBoolean("SingleToteAuto", false);
+		}
+
+		try {
+			SmartDashboard.getBoolean("ThreeToteAuto");
+		} catch (Exception e) {
+			SmartDashboard.putBoolean("ThreeToteAuto", false);
+		}
+
+		try {
+			SmartDashboard.getBoolean("LandfillAuto");
+		} catch (Exception e) {
+			SmartDashboard.putBoolean("LandfillAuto", false);
+		}
 
 		robot = this;
 	}
 
 	public void autonomousInit() {
+		autoCommand = new LandfillAuto();
 		if (SmartDashboard.getBoolean("DoNothingAuto")) {
 			autoCommand = new DoNothingAuto();
 		}
@@ -79,13 +104,17 @@ public class Robot extends IterativeRobot {
 			autoCommand = new DriveForwardAuto();
 		}
 
-		else if (SmartDashboard.getBoolean("SingleToteAuto")) {
-			autoCommand = new SingleToteAuto();
+		else if (SmartDashboard.getBoolean("LandfillAuto")) {
+			autoCommand = new LandfillAuto();
 		}
-
-		else if (SmartDashboard.getBoolean("ThreeToteAuto")) {
-			autoCommand = new ThreeToteAuto();
-		}
+		//
+		// else if (SmartDashboard.getBoolean("SingleToteAuto")) {
+		// autoCommand = new SingleToteAuto();
+		// }
+		//
+		// else if (SmartDashboard.getBoolean("ThreeToteAuto")) {
+		// autoCommand = new ThreeToteAuto();
+		// }
 
 		Scheduler.getInstance().add(autoCommand);
 		cancelAuto = false;
