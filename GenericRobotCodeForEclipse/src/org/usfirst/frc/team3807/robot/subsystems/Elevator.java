@@ -13,6 +13,7 @@ public class Elevator extends Subsystem {
 
 	Victor jaguar1, jaguar2;
 	
+	
 	int currentPosition;
 
 	public Elevator(int jagLeft, int jagRight) {

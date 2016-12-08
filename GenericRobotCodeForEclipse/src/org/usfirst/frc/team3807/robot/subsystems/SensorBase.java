@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -30,7 +29,7 @@ public class SensorBase extends Subsystem {
 	Encoder linearEncoder, rotaryEncoder;
 	//detect length or position using magnetic strips
 	
-	Gyro gyro;
+	//Gyro gyro;
 	//determines angle
     
 	
